@@ -184,9 +184,7 @@ Case 3: Slight
 
 ### Saved Model Files
 
-* severity_model.pkl
-* encoders.pkl
-* severity_encoder.pkl
+* road_accident_model.pkl
 
 ---
 
@@ -250,9 +248,7 @@ RoadAccident-SeverityPredictor/
 ├── predict.py
 ├── app.py
 │
-├── severity_model.pkl
-├── encoders.pkl
-├── severity_encoder.pkl
+├── road_accident_model.pkl
 │
 ├── templates/
 │   └── index.html
