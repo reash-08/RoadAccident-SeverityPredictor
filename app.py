@@ -4,9 +4,11 @@ import joblib
 
 app = Flask(__name__)
 
-model = joblib.load("severity_model.pkl")
-encoders = joblib.load("encoders.pkl")
-severity_encoder = joblib.load("severity_encoder.pkl")
+package = joblib.load("road_accident_model.pkl")
+
+model = package["model"]
+encoders = package["encoders"]
+severity_encoder = package["severity_encoder"]
 
 
 @app.route("/")
