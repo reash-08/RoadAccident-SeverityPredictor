@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Smart City Road Accident Severity Predictor
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>
+        🚦 Smart City Road Accident Severity Predictor
+    </h1>
+
+    <p>
+        AI-Powered Traffic Risk Assessment System
+    </p>
+
+</header>
+
+<section class="dashboard">
+
+    <div class="stats-container">
+
+        <div class="card">
+            <h2>50K+</h2>
+            <p>Accident Records</p>
+        </div>
+
+        <div class="card">
+            <h2>63.8%</h2>
+            <p>Weighted F1 Score</p>
+        </div>
+
+        <div class="card">
+            <h2>Gradient Boosting</h2>
+            <p>Machine Learning Model</p>
+        </div>
+
+    </div>
+
+    <div class="content">
+
+        <!-- FORM -->
+
+        <div class="form-panel">
+
+            <h2>
+                Enter Accident Details
+            </h2>
+
+            <form id="predictForm">
+
+                <label>Road Type</label>
+
+                <select name="road_type">
+
+                    <option>Single carriageway</option>
+
+                    <option>Dual carriageway</option>
+
+                    <option>Roundabout</option>
+
+                    <option>One way street</option>
+
+                    <option>Slip road</option>
+
+                    <option>Unknown</option>
+
+                </select>
+
+                <label>Weather Condition</label>
+
+                <select name="weather">
+
+                    <option>Fine no high winds</option>
+
+                    <option>Raining no high winds</option>
+
+                    <option>Fog or mist</option>
+
+                    <option>Snowing no high winds</option>
+
+                    <option>Fine + high winds</option>
+
+                    <option>Raining + high winds</option>
+
+                </select>
+
+                <label>Road Surface</label>
+
+                <select name="road">
+
+                    <option>Dry</option>
+
+                    <option>Wet or damp</option>
+
+                    <option>Snow</option>
+
+                    <option>Frost or ice</option>
+
+                </select>
+
+                <label>Light Condition</label>
+
+                <select name="light">
+
+                    <option>Daylight</option>
+
+                    <option>Darkness - lights lit</option>
+
+                    <option>Darkness - no lighting</option>
+
+                    <option>Darkness - lights unlit</option>
+
+                </select>
+
+                <label>Urban / Rural Area</label>
+
+                <select name="area">
+
+                    <option>Urban</option>
+
+                    <option>Rural</option>
+
+                    <option>Unallocated</option>
+
+                </select>
+
+                <label>Speed Limit</label>
+
+                <input type="number"
+                       name="speed"
+                       required>
+
+                <label>Number of Vehicles</label>
+
+                <input type="number"
+                       name="vehicles"
+                       required>
+
+                <label>Number of Casualties</label>
+
+                <input type="number"
+                       name="casualties"
+                       required>
+
+                <div class="btn-group">
+
+                    <button type="submit"
+                            class="predict-btn">
+
+                        Predict Severity
+
+                    </button>
+
+                    <button type="button"
+                            class="reset-btn"
+                            onclick="resetForm()">
+
+                        Reset
+
+                    </button>
+
+                </div>
+
+            </form>
+
+            <div class="loader"
+                 id="loader">
+
+            </div>
+
+        </div>
+
+        <!-- RESULT -->
+
+        <div class="result-panel">
+
+            <h2>
+                Prediction Result
+            </h2>
+
+            <div class="result-box">
+
+                <h1 id="severityText">
+
+                    Waiting For Prediction
+
+                </h1>
+
+                <h3 id="confidenceText">
+
+                    Confidence: --
+
+                </h3>
+
+                <div class="progress-container">
+
+                    <div class="progress-bar"
+                         id="progressBar">
+
+                    </div>
+
+                </div>
+
+                <div class="recommendation"
+                     id="recommendation">
+
+                    Submit accident details to
+                    generate prediction.
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <h2>
+                Recent Predictions
+            </h2>
+
+            <ul id="historyList">
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script src="{{ url_for('static',
+filename='script.js') }}">
+</script>
+
+</body>
+
+</html>
