@@ -1,175 +1,258 @@
-# Road Accident Severity Predictor 🚗⚠️
+# 🚦 Road Accident Severity Predictor
 
 ## Project Overview
 
-The Road Accident Severity Predictor is a machine learning-based web application developed to predict the severity of road accidents using historical UK Road Safety data. The system analyzes accident-related factors such as weather conditions, road surface conditions, lighting conditions, speed limits, and vehicle information to classify accident severity into:
+The Road Accident Severity Predictor is a Machine Learning and Flask-based web application developed to predict the severity of road accidents using historical UK Road Safety data.
+
+The system analyzes accident-related factors such as weather conditions, road type, road surface conditions, lighting conditions, speed limits, vehicle information, and casualty information to classify accident severity into:
 
 * Slight
 * Serious
 * Fatal
 
-The project aims to support smart city initiatives by providing data-driven insights that can help improve road safety and accident prevention strategies.
+The project aims to support Smart City initiatives by providing data-driven insights that can help improve road safety, traffic planning, and accident prevention strategies.
 
 ---
 
-## Features
+# ✨ Features
 
-* Exploratory Data Analysis (EDA) on UK Road Safety Dataset
-* Data preprocessing and handling of missing values
+### 📊 Exploratory Data Analysis (EDA)
+
+* Dataset loading and inspection
+* Missing value analysis
+* Severity distribution analysis
+* Weather condition analysis
+* Road surface condition analysis
+* Light condition analysis
+* Urban vs Rural accident analysis
+* Speed limit analysis
+* Data visualization using Matplotlib and Seaborn
+
+### 🤖 Machine Learning
+
+* Data preprocessing and cleaning
+* Missing value handling
 * Label Encoding of categorical variables
-* Accident severity prediction using Gradient Boosting Classifier
-* Weighted F1-Score evaluation for imbalanced data
-* Probability-based severity prediction
-* Flask-based web interface
-* Model serialization using Pickle (.pkl)
-* Smart City road safety application
+* Feature selection
+* Train-Test Split (80:20)
+* Gradient Boosting Classifier
+* Weighted F1-Score evaluation
+* Model serialization using Joblib
+
+### 🌐 Flask Web Application
+
+* Interactive dashboard
+* Real-time accident severity prediction
+* Confidence score display
+* Probability visualization
+* Safety recommendations
+* Reset functionality
+* Responsive UI
 
 ---
 
-## Dataset
+# 📁 Dataset
 
-Dataset: UK Road Safety Accident Dataset
+### Dataset Used
 
-The dataset contains accident-related information including:
+UK Road Safety Accident Dataset
 
-* Weather Conditions
-* Road Surface Conditions
-* Light Conditions
-* Speed Limit
-* Number of Vehicles
-* Number of Casualties
-* Urban/Rural Area
-* Accident Severity
+### Original Dataset
 
-Original dataset contains over 2 million accident records.
+* Records: 2,047,256+
+* Features: 34
 
-For model training, a sample of 50,000 records is used as specified in the project requirements.
+### Training Dataset
+
+* Sample Size: 50,000 records
+
+### Features Used
+
+* Road_Type
+* Weather_Conditions
+* Road_Surface_Conditions
+* Light_Conditions
+* Speed_limit
+* Urban_or_Rural_Area
+* Number_of_Vehicles
+* Number_of_Casualties
+
+### Target Variable
+
+Accident_Severity
+
+Classes:
+
+* Slight
+* Serious
+* Fatal
 
 ---
 
-## Technology Stack
+# 🛠 Technology Stack
 
-### Backend
+## Backend
 
 * Python
 * Flask
 
-### Machine Learning
+## Machine Learning
 
-* Scikit-learn
+* Scikit-Learn
 * Gradient Boosting Classifier
+* Joblib
 
-### Data Analysis
+## Data Analysis
 
 * Pandas
 * NumPy
 * Matplotlib
 * Seaborn
 
-### Frontend
+## Frontend
 
 * HTML
 * CSS
 * JavaScript
 
-### Database
-
-* SQLite
-
 ---
 
-## Project Workflow
+# 📈 Project Workflow
 
-### M1: Data Analysis
+## M1 – Exploratory Data Analysis
 
-* Load UK Road Safety dataset
-* Null value analysis
-* Weather condition analysis
-* Road condition analysis
+### Tasks Completed
+
+* Dataset loading
+* Dataset shape analysis
+* Missing value analysis
 * Severity distribution analysis
+* Weather condition analysis
+* Road surface condition analysis
+* Light condition analysis
+* Urban/Rural area analysis
+* Speed limit analysis
+* Data visualization
 
-### M2: Model Training
+### Generated Visualizations
 
-* Label Encoding
-* Feature Selection
-* Gradient Boosting Classification
-* Weighted F1-Score Evaluation
-* Save model and encoders using Pickle
-
-### M3: Web Application
-
-User enters:
-
-* Weather Condition
-* Road Surface Condition
-* Light Condition
-* Speed Limit
-* Driver/Road Factors
-
-Output:
-
-* Predicted Severity
-* Prediction Probability
-
-### M4: Deployment
-
-* Flask deployment
-* Live prediction service
-* Demo presentation
+* Accident Severity Distribution
+* Weather vs Severity
+* Road Surface vs Severity
+* Light Conditions vs Severity
+* Speed Limit vs Severity
+* Urban/Rural Area vs Severity
 
 ---
 
-## Model Performance
+## M2 – Model Training & Evaluation
+
+### Data Preprocessing
+
+* Missing value handling
+* Feature selection
+* Label Encoding
+* Dataset preparation
+
+### Model Training
+
+Algorithm Used:
+
+**Gradient Boosting Classifier**
+
+### Model Performance
+
+Training Samples: 40,000
+
+Testing Samples: 10,000
 
 Evaluation Metric:
 
-* Weighted F1-Score
+**Weighted F1-Score**
 
-Reason:
-The dataset is highly imbalanced, with Slight accidents occurring much more frequently than Fatal accidents. Weighted F1-Score provides a more reliable evaluation than accuracy.
+Score:
 
----
+**63.76%**
 
-## Installation
+### Sample Predictions
 
-Clone the repository:
+Case 1: Slight
 
-```bash
-git clone https://github.com/YOUR_USERNAME/RoadAccident-SeverityPredictor.git
-cd RoadAccident-SeverityPredictor
-```
+Case 2: Fatal
 
-Install dependencies:
+Case 3: Slight
 
-```bash
-pip install -r requirements.txt
-```
+### Saved Model Files
 
-Run the application:
-
-```bash
-python app.py
-```
-
-Open:
-
-```text
-http://127.0.0.1:5000
-```
+* severity_model.pkl
+* encoders.pkl
+* severity_encoder.pkl
 
 ---
 
-## Repository Structure
+## M3 – Flask Web Application
+
+The dashboard allows users to enter accident-related information and instantly receive severity predictions.
+
+### Input Features
+
+* Road Type
+* Weather Condition
+* Road Surface Condition
+* Light Condition
+* Urban/Rural Area
+* Speed Limit
+* Number of Vehicles
+* Number of Casualties
+
+### Output
+
+* Predicted Severity
+* Confidence Percentage
+* Safety Recommendation
+
+### Dashboard Features
+
+* Modern UI Design
+* Real-Time Predictions
+* Confidence Progress Bar
+* Interactive Forms
+* Responsive Layout
+* Reset Functionality
+
+---
+
+# 📊 Model Performance
+
+The dataset is highly imbalanced because Slight accidents occur much more frequently than Fatal accidents.
+
+Therefore, **Weighted F1-Score** was used instead of simple accuracy.
+
+| Metric            | Value                        |
+| ----------------- | ---------------------------- |
+| Weighted F1 Score | 63.76%                       |
+| Algorithm         | Gradient Boosting Classifier |
+| Training Samples  | 40,000                       |
+| Testing Samples   | 10,000                       |
+
+---
+
+# 📂 Project Structure
 
 ```text
 RoadAccident-SeverityPredictor/
 │
+├── Accident_Information.csv
 ├── accident_50k.csv
-├── train_model.py
+│
+├── m1_eda.py
+├── m2_training.py
+├── predict.py
 ├── app.py
+│
 ├── severity_model.pkl
 ├── encoders.pkl
-├── requirements.txt
+├── severity_encoder.pkl
 │
 ├── templates/
 │   └── index.html
@@ -178,21 +261,102 @@ RoadAccident-SeverityPredictor/
 │   ├── style.css
 │   └── script.js
 │
-└── README.md
+├── severity_distribution.png
+├── weather_vs_severity.png
+├── road_surface_vs_severity.png
+├── light_conditions_vs_severity.png
+├── speed_limit_vs_severity.png
+├── urban_rural_vs_severity.png
+│
+├── README.md
+└── requirements.txt
 ```
 
 ---
 
-## Future Enhancements
+# 🚀 Installation
 
-* Integration with real-time traffic data
-* Advanced ensemble models (XGBoost, LightGBM)
-* Interactive dashboard for accident analytics
+### Clone Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/RoadAccident-SeverityPredictor.git
+cd RoadAccident-SeverityPredictor
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Train Model
+
+```bash
+python m2_training.py
+```
+
+### Run Test Predictions
+
+```bash
+python predict.py
+```
+
+### Start Flask Application
+
+```bash
+python app.py
+```
+
+Open in browser:
+
+```text
+http://127.0.0.1:5000
+```
+
+---
+
+# 📷 Sample Output
+
+Example Prediction:
+
+```text
+Predicted Severity: Serious
+Confidence: 38.64%
+```
+
+---
+
+# 📌 Dataset Source
+
+The original dataset is too large to host directly on GitHub.
+
+Dataset:
+UK Road Safety Accident Dataset (Kaggle)
+
+Download the dataset and place:
+
+```text
+Accident_Information.csv
+```
+
+inside the project root directory before running the scripts.
+
+---
+
+# 🔮 Future Enhancements
+
+* Real-time traffic data integration
+* Weather API integration
+* XGBoost and LightGBM models
 * GIS-based accident hotspot visualization
+* Interactive analytics dashboard
+* Cloud deployment
 * Smart city traffic management integration
 
 ---
 
-## Author
+# 👨‍💻 Author
 
 Developed as a Smart City Machine Learning Project using the UK Road Safety Dataset.
+
+Road Accident Severity Prediction using Machine Learning, Data Analytics, and Flask Web Development.
