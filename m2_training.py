@@ -198,28 +198,14 @@ print(
 # STEP 13: SAVE MODEL
 # ==========================================
 
-joblib.dump(
-    model,
-    "severity_model.pkl"
-)
-
-joblib.dump(
-    encoders,
-    "encoders.pkl"
-)
-
-joblib.dump(
-    severity_encoder,
-    "severity_encoder.pkl"
-)
-
-print("\nModel Saved Successfully")
-print("Encoders Saved Successfully")
-
 import joblib
 
-encoders = joblib.load("encoders.pkl")
+model_package = {
+    "model": model,
+    "encoders": encoders,
+    "severity_encoder": severity_encoder
+}
 
-for col, enc in encoders.items():
-    print("\n", col)
-    print(enc.classes_)
+joblib.dump(model_package, "road_accident_model.pkl")
+
+print("Single model package saved successfully")
