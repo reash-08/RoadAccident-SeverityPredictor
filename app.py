@@ -4,7 +4,7 @@ import joblib
 
 app = Flask(__name__)
 
-package = joblib.load("road_accident_model.pkl")
+package = joblib.load("road_accident_model_final.pkl")
 
 model = package["model"]
 encoders = package["encoders"]
