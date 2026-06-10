@@ -209,3 +209,4 @@ model_package = {
 joblib.dump(model_package, "road_accident_model.pkl")
 
 print("Single model package saved successfully")
+
