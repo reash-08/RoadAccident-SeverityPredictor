@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Model Information</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+
+
+</head>
+
+<body>
+
+<header>
+
+
+<h1>
+    🤖 Machine Learning Model Information
+</h1>
+
+<p>
+    Gradient Boosting Classifier Performance Dashboard
+</p>
+
+</header>
+
+<nav class="navbar">
+
+<a href="/">Home</a>
+
+<a href="/history">History</a>
+
+<a href="/analytics">Analytics</a>
+
+<a href="/model-info">Model Info</a>
+
+<a href="/about">About</a>
+
+
+</nav>
+
+<section class="dashboard">
+
+```
+<!-- MODEL STATS -->
+
+<div class="stats-container">
+
+    <div class="card">
+        <h2>77.5%</h2>
+        <p>Weighted F1 Score</p>
+    </div>
+
+    <div class="card">
+        <h2>50K+</h2>
+        <p>Training Records</p>
+    </div>
+
+    <div class="card">
+        <h2>3</h2>
+        <p>Prediction Classes</p>
+    </div>
+
+</div>
+
+<!-- MODEL DETAILS -->
+
+<div class="result-panel">
+
+    <h2>🧠 Selected Model</h2>
+
+    <br>
+
+    <h3>Gradient Boosting Classifier</h3>
+
+    <br>
+
+    <p style="line-height:1.9;">
+
+        Gradient Boosting is an ensemble Machine Learning
+        algorithm that combines multiple decision trees
+        sequentially to improve predictive performance.
+
+        It was selected after comparing different models
+        and achieved the best overall performance on the
+        accident severity dataset.
+
+    </p>
+
+</div>
+
+<br>
+
+<!-- PERFORMANCE -->
+
+<div class="result-panel">
+
+    <h2>📈 Model Performance</h2>
+
+    <br>
+
+    <table style="width:100%; color:white;">
+
+        <tr>
+            <td><strong>Algorithm</strong></td>
+            <td>Gradient Boosting Classifier</td>
+        </tr>
+
+        <tr>
+            <td><strong>Learning Rate</strong></td>
+            <td>0.1</td>
+        </tr>
+
+        <tr>
+            <td><strong>Estimators</strong></td>
+            <td>200</td>
+        </tr>
+
+        <tr>
+            <td><strong>Max Depth</strong></td>
+            <td>6</td>
+        </tr>
+
+        <tr>
+            <td><strong>Weighted F1 Score</strong></td>
+            <td>77.5%</td>
+        </tr>
+
+        <tr>
+            <td><strong>Prediction Type</strong></td>
+            <td>Multi-Class Classification</td>
+        </tr>
+
+    </table>
+
+</div>
+
+<br>
+
+<!-- TARGET CLASSES -->
+
+<div class="result-panel">
+
+    <h2>🎯 Target Classes</h2>
+
+    <br>
+
+    <div class="stats-container">
+
+        <div class="card">
+            <h2>🟢</h2>
+            <p>Slight</p>
+        </div>
+
+        <div class="card">
+            <h2>🟠</h2>
+            <p>Serious</p>
+        </div>
+
+        <div class="card">
+            <h2>🔴</h2>
+            <p>Fatal</p>
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<!-- FEATURES -->
+
+<div class="result-panel">
+
+    <h2>📋 Features Used For Prediction</h2>
+
+    <ul style="line-height:2; margin-top:15px;">
+
+        <li>Road Type</li>
+
+        <li>Weather Conditions</li>
+
+        <li>Road Surface Conditions</li>
+
+        <li>Light Conditions</li>
+
+        <li>Speed Limit</li>
+
+        <li>Urban / Rural Area</li>
+
+        <li>Number of Vehicles</li>
+
+        <li>Number of Casualties</li>
+
+    </ul>
+
+</div>
+
+<br>
+
+<!-- WHY THIS MODEL -->
+
+<div class="result-panel">
+
+    <h2>✅ Why Gradient Boosting?</h2>
+
+    <ul style="line-height:2; margin-top:15px;">
+
+        <li>Handles complex non-linear relationships.</li>
+
+        <li>Provides higher prediction accuracy.</li>
+
+        <li>Performs well on structured tabular data.</li>
+
+        <li>Reduces prediction errors through boosting.</li>
+
+        <li>Outperformed baseline Decision Tree model.</li>
+
+    </ul>
+
+</div>
+
+
+</section>
+
+</body>
+
+</html>
