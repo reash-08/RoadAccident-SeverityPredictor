@@ -1,8 +1,13 @@
 from flask import Flask, render_template, request, jsonify
 import pandas as pd
 import joblib
+import sqlite3
 
 app = Flask(__name__)
+
+# ==========================
+# LOAD MODEL
+# ==========================
 
 package = joblib.load("road_accident_model_final.pkl")
 
@@ -10,11 +15,77 @@ model = package["model"]
 encoders = package["encoders"]
 severity_encoder = package["severity_encoder"]
 
+DB_PATH = "database/accidents.db"
+
+
+# ==========================
+# DATABASE CONNECTION
+# ==========================
+
+def get_db_connection():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+# ==========================
+# ROUTES
+# ==========================
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
+
+@app.route("/history")
+def history():
+
+    import sqlite3
+
+    conn = sqlite3.connect("database/accidents.db")
+
+    conn.row_factory = sqlite3.Row
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT *
+        FROM predictions
+        ORDER BY id DESC
+    """)
+
+    records = cursor.fetchall()
+
+    conn.close()
+
+    return render_template(
+        "history.html",
+        records=records
+    )
+
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+@app.route("/model-info")
+def model_info():
+    return render_template("model_info.html")
+
+
+@app.route("/analytics")
+def analytics():
+    return render_template("analytics.html")
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
+
+
+# ==========================
+# PREDICT
+# ==========================
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -33,13 +104,13 @@ def predict():
         vehicles = int(data["vehicles"])
         casualties = int(data["casualties"])
 
-        road_type_encoded = encoders["Road_Type"].transform(
-            [road_type]
-        )[0]
+        road_type_encoded = encoders[
+            "Road_Type"
+        ].transform([road_type])[0]
 
-        weather_encoded = encoders["Weather_Conditions"].transform(
-            [weather]
-        )[0]
+        weather_encoded = encoders[
+            "Weather_Conditions"
+        ].transform([weather])[0]
 
         road_encoded = encoders[
             "Road_Surface_Conditions"
@@ -78,7 +149,9 @@ def predict():
 
         prediction = model.predict(input_data)
 
-        probabilities = model.predict_proba(input_data)
+        probabilities = model.predict_proba(
+            input_data
+        )
 
         severity = severity_encoder.inverse_transform(
             prediction
@@ -88,6 +161,48 @@ def predict():
             float(max(probabilities[0])) * 100,
             2
         )
+
+        # ==========================
+        # SAVE TO SQLITE
+        # ==========================
+
+        conn = get_db_connection()
+
+        conn.execute(
+            """
+            INSERT INTO predictions
+            (
+                road_type,
+                weather_conditions,
+                road_surface_conditions,
+                light_conditions,
+                speed_limit,
+                urban_or_rural_area,
+                number_of_vehicles,
+                number_of_casualties,
+                prediction
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                road_type,
+                weather,
+                road,
+                light,
+                speed,
+                area,
+                vehicles,
+                casualties,
+                severity
+            )
+        )
+
+        conn.commit()
+        conn.close()
+
+        # ==========================
+        # UI COLORS
+        # ==========================
 
         if severity == "Fatal":
 
@@ -114,10 +229,12 @@ def predict():
             )
 
         return jsonify({
+
             "severity": severity,
             "confidence": confidence,
             "color": color,
             "recommendation": recommendation
+
         })
 
     except Exception as e:
