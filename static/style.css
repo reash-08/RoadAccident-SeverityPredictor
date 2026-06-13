@@ -529,3 +529,21 @@ tr:hover{
     box-shadow:
     0 4px 15px rgba(0,0,0,.4);
 }
+
+.contact-link{
+
+    color:#00ff66;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.contact-link:hover{
+
+    color:#ffffff;
+
+    text-decoration:underline;
+}
