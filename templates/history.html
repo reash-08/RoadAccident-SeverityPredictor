@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Prediction History</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static',
+      filename='style.css') }}">
+
+
+</head>
+
+<body>
+
+<header>
+
+
+<h1>
+    📋 Prediction History
+</h1>
+
+<p>
+    All Accident Severity Predictions Stored In SQLite
+</p>
+
+
+</header>
+
+<nav class="navbar">
+
+```
+<a href="/">Home</a>
+
+<a href="/history">History</a>
+
+<a href="/analytics">Analytics</a>
+
+<a href="/model-info">Model Info</a>
+
+<a href="/about">About</a>
+
+<a href="/contact">Contact</a>
+```
+
+</nav>
+
+<section class="dashboard">
+
+```
+<div class="result-panel">
+
+    <h2>
+        Stored Predictions
+    </h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+            width:100%;
+            border-collapse:collapse;
+            color:white;
+            ">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Road Type</th>
+
+                    <th>Weather</th>
+
+                    <th>Road Surface</th>
+
+                    <th>Light</th>
+
+                    <th>Speed</th>
+
+                    <th>Area</th>
+
+                    <th>Vehicles</th>
+
+                    <th>Casualties</th>
+
+                    <th>Prediction</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for row in records %}
+
+                <tr>
+
+                    <td>{{ row.id }}</td>
+
+                    <td>{{ row.road_type }}</td>
+
+                    <td>{{ row.weather_conditions }}</td>
+
+                    <td>{{ row.road_surface_conditions }}</td>
+
+                    <td>{{ row.light_conditions }}</td>
+
+                    <td>{{ row.speed_limit }}</td>
+
+                    <td>{{ row.urban_or_rural_area }}</td>
+
+                    <td>{{ row.number_of_vehicles }}</td>
+
+                    <td>{{ row.number_of_casualties }}</td>
+
+                    <td>
+
+                        {% if row.prediction == 'Fatal' %}
+
+                        🔴 Fatal
+
+                        {% elif row.prediction == 'Serious' %}
+
+                        🟠 Serious
+
+                        {% else %}
+
+                        🟢 Slight
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<footer class="footer">
+
+
+Smart City Road Accident Severity Prediction System
+
+
+</footer>
+
+</body>
+
+</html>
