@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Analytics Dashboard</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+
+
+</head>
+
+<body>
+
+<header>
+
+
+<h1>
+    📊 Analytics Dashboard
+</h1>
+
+<p>
+    Road Accident Severity Analysis & Visual Insights
+</p>
+
+
+</header>
+
+<nav class="navbar">
+
+
+<a href="/">Home</a>
+
+<a href="/history">History</a>
+
+<a href="/analytics">Analytics</a>
+
+<a href="/model-info">Model Info</a>
+
+<a href="/about">About</a>
+
+<a href="/contact">Contact</a>
+
+
+</nav>
+
+<section class="dashboard">
+
+
+<!-- SUMMARY CARDS -->
+
+<div class="stats-container">
+
+    <div class="card">
+
+        <h2>50K+</h2>
+
+        <p>Accident Records</p>
+
+    </div>
+
+    <div class="card">
+
+        <h2>6</h2>
+
+        <p>EDA Charts</p>
+
+    </div>
+
+    <div class="card">
+
+        <h2>3</h2>
+
+        <p>Severity Classes</p>
+
+    </div>
+
+</div>
+
+<!-- CHART GRID -->
+
+<div class="chart-grid">
+
+    <div class="chart-card">
+
+        <h3>Severity Distribution</h3>
+
+        <img src="{{ url_for('static',
+        filename='charts/severity_distribution.png') }}">
+
+    </div>
+
+    <div class="chart-card">
+
+        <h3>Weather vs Severity</h3>
+
+        <img src="{{ url_for('static',
+        filename='charts/weather_vs_severity.png') }}">
+
+    </div>
+
+    <div class="chart-card">
+
+        <h3>Speed Limit vs Severity</h3>
+
+        <img src="{{ url_for('static',
+        filename='charts/speed_limit_vs_severity.png') }}">
+
+    </div>
+
+    <div class="chart-card">
+
+        <h3>Road Surface vs Severity</h3>
+
+        <img src="{{ url_for('static',
+        filename='charts/road_surface_vs_severity.png') }}">
+
+    </div>
+
+    <div class="chart-card">
+
+        <h3>Urban/Rural Area vs Severity</h3>
+
+        <img src="{{ url_for('static',
+        filename='charts/urban_rural_vs_severity.png') }}">
+
+    </div>
+
+    <div class="chart-card">
+
+        <h3>Light Conditions vs Severity</h3>
+
+        <img src="{{ url_for('static',
+        filename='charts/light_conditions_vs_severity.png') }}">
+
+    </div>
+
+</div>
+
+<br>
+
+<!-- INSIGHTS SECTION -->
+
+<div class="result-panel">
+
+    <h2>📌 Key Insights</h2>
+
+    <br>
+
+    <ul style="line-height:2;">
+
+        <li>Higher speed limits are strongly associated with Fatal accidents.</li>
+
+        <li>Rain, fog, and snow increase accident severity.</li>
+
+        <li>Darkness significantly contributes to serious collisions.</li>
+
+        <li>Poor road surface conditions increase accident risk.</li>
+
+        <li>Accidents involving more casualties tend to have higher severity.</li>
+
+        <li>Rural roads show a higher proportion of Fatal incidents.</li>
+
+    </ul>
+
+</div>
+
+
+</section>
+
+<footer class="footer">
+
+
+Smart City Road Accident Severity Prediction System
+
+<br><br>
+
+Flask • SQLite • Machine Learning • Analytics Dashboard
+
+
+</footer>
+
+</body>
+
+</html>
