@@ -187,3 +187,63 @@ function resetForm() {
 
     predictionHistory = [];
 }
+
+const featureSelect =
+document.getElementById(
+"featureSelect"
+);
+
+const featureValue =
+document.getElementById(
+"featureValue"
+);
+
+function filterTable(){
+
+    const columnIndex =
+    parseInt(
+        featureSelect.value
+    );
+
+    const value =
+    featureValue.value
+    .toLowerCase();
+
+    const rows =
+    document.querySelectorAll(
+        "#historyTable tbody tr"
+    );
+
+    rows.forEach(row=>{
+
+        const cellText =
+        row.cells[columnIndex]
+        .innerText
+        .toLowerCase();
+
+        if(
+            cellText.includes(value)
+        ){
+
+            row.style.display="";
+
+        }
+        else{
+
+            row.style.display="none";
+
+        }
+
+    });
+
+}
+
+featureValue.addEventListener(
+    "keyup",
+    filterTable
+);
+
+featureSelect.addEventListener(
+    "change",
+    filterTable
+);
