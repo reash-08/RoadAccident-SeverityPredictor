@@ -1,107 +1,279 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History</title>
 
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 
-<meta charset="UTF-8">
+    <style>
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+        .history-stats{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:20px;
+            margin-bottom:30px;
+        }
 
-<title>Prediction History</title>
+        .history-card{
+            background:rgba(255,255,255,.12);
+            backdrop-filter:blur(15px);
+            border-radius:20px;
+            padding:25px;
+            color:white;
+            text-align:center;
+        }
 
-<link rel="stylesheet"
-      href="{{ url_for('static',
-      filename='style.css') }}">
+        .history-card h2{
+            font-size:48px;
+            margin-bottom:8px;
+        }
 
+        .history-card p{
+            font-size:18px;
+        }
 
+        .history-toolbar{
+            display:grid;
+            grid-template-columns:2fr 1fr;
+            gap:15px;
+            margin-bottom:20px;
+        }
+
+        .history-search,
+        .history-filter{
+            padding:14px;
+            border:none;
+            border-radius:12px;
+            background:rgba(255,255,255,.15);
+            color:white;
+            font-size:15px;
+        }
+
+        .history-search::placeholder{
+            color:#ddd;
+        }
+
+        .table-wrapper{
+            overflow-x:auto;
+            border-radius:15px;
+        }
+
+        .history-table{
+            width:100%;
+            border-collapse:collapse;
+            color:white;
+            min-width:1200px;
+        }
+
+        .history-table th{
+            background:rgba(255,255,255,.15);
+            padding:14px;
+            text-align:center;
+            font-size:15px;
+        }
+
+        .history-table td{
+            padding:12px;
+            text-align:center;
+        }
+
+        .history-table tr:hover{
+            background:rgba(255,255,255,.08);
+        }
+
+        .badge{
+            padding:8px 15px;
+            border-radius:30px;
+            font-weight:600;
+            display:inline-block;
+            min-width:90px;
+        }
+
+        .slight{
+            background:#00c853;
+        }
+
+        .serious{
+            background:#ff9800;
+        }
+
+        .fatal{
+            background:#ff1744;
+        }
+
+        .section-title{
+            margin-bottom:20px;
+            color:white;
+            font-size:32px;
+        }
+
+    </style>
 </head>
 
 <body>
 
 <header>
-
-
-<h1>
-    📋 Prediction History
-</h1>
-
-<p>
-    All Accident Severity Predictions Stored In SQLite
-</p>
-
-
+    <h1>📋 Prediction History</h1>
+    <p>Stored Accident Severity Predictions</p>
 </header>
 
 <nav class="navbar">
-
-```
-<a href="/">Home</a>
-
-<a href="/history">History</a>
-
-<a href="/analytics">Analytics</a>
-
-<a href="/model-info">Model Info</a>
-
-<a href="/about">About</a>
-
-<a href="/contact">Contact</a>
-```
-
+    <a href="/">Home</a>
+    <a href="/history">History</a>
+    <a href="/analytics">Analytics</a>
+    <a href="/model-info">Model Info</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
 </nav>
 
 <section class="dashboard">
 
-```
-<div class="result-panel">
+    <!-- Stats -->
 
-    <h2>
-        Stored Predictions
-    </h2>
+    <div class="history-stats">
 
-    <br>
+        <div class="history-card">
+            <h2>{{ records|length }}</h2>
+            <p>Total Predictions</p>
+        </div>
 
-    <div style="overflow-x:auto;">
+        <div class="history-card">
+            <h2>
+                {{ records | selectattr('prediction','equalto','Slight') | list | length }}
+            </h2>
+            <p> Slight Cases</p>
+        </div>
 
-        <table
-            style="
-            width:100%;
-            border-collapse:collapse;
-            color:white;
-            ">
+        <div class="history-card">
+            <h2>
+                {{ records | selectattr('prediction','equalto','Serious') | list | length }}
+            </h2>
+            <p> Serious Cases</p>
+        </div>
 
-            <thead>
+        <div class="history-card">
+            <h2>
+                {{ records | selectattr('prediction','equalto','Fatal') | list | length }}
+            </h2>
+            <p> Fatal Cases</p>
+        </div>
+
+    </div>
+
+    <!-- Table Section -->
+
+    <div class="result-panel">
+
+        <h2 class="section-title">Prediction Records</h2>
+
+        <div class="history-filters">
+
+    <select id="severityFilter">
+        <option value="All">All Predictions</option>
+        <option value="Slight">Slight</option>
+        <option value="Serious">Serious</option>
+        <option value="Fatal">Fatal</option>
+    </select>
+
+    <br><br>
+
+    <select id="areaFilter">
+        <option value="All">All Areas</option>
+        <option value="Urban">Urban</option>
+        <option value="Rural">Rural</option>
+        <option value="Unallocated">Unallocated</option>
+    </select>
+
+    <br><br>
+
+    <select id="weatherFilter">
+        <option value="All">All Weather</option>
+        <option value="Fine no high winds">Fine no high winds</option>
+        <option value="Rain no high winds">Rain no high winds</option>
+        <option value="Fog or Mist">Fog or Mist</option>
+        <option value="Snowing no high winds">Snowing no high winds</option>
+        <option value="Fine + high winds">Fine + high winds</option>
+        <option value="Raining + high winds">Raining + high winds</option>
+    </select>
+
+    <br><br>
+
+    <button id="resetFilters" class="filter-reset-btn">
+    Reset Filters
+</button>
+
+</div>
+
+        <div class="history-toolbar">
+
+    <div>
+
+        <label style="color:white;">
+            Search Feature
+        </label>
+
+        <select id="featureSelect" class="history-filter">
+
+            <option value="1">Road Type</option>
+            <option value="2">Weather</option>
+            <option value="3">Road Surface</option>
+            <option value="4">Light</option>
+            <option value="5">Speed</option>
+            <option value="6">Area</option>
+            <option value="7">Vehicles</option>
+            <option value="8">Casualties</option>
+            <option value="9">Prediction</option>
+
+        </select>
+
+    </div>
+
+    <div>
+
+        <label style="color:white;">
+            Search Value
+        </label>
+
+        <input
+            type="text"
+            id="searchValue"
+            class="history-search"
+            placeholder="Enter value...">
+
+    </div>
+
+</div>
+
+
+
+        <div class="table-wrapper">
+
+            <table class="history-table" id="historyTable">
+
+                <thead>
 
                 <tr>
 
                     <th>ID</th>
-
                     <th>Road Type</th>
-
                     <th>Weather</th>
-
                     <th>Road Surface</th>
-
                     <th>Light</th>
-
                     <th>Speed</th>
-
                     <th>Area</th>
-
                     <th>Vehicles</th>
-
                     <th>Casualties</th>
-
                     <th>Prediction</th>
 
                 </tr>
 
-            </thead>
+                </thead>
 
-            <tbody>
+                <tbody>
 
                 {% for row in records %}
 
@@ -127,17 +299,14 @@
 
                     <td>
 
-                        {% if row.prediction == 'Fatal' %}
+                        {% if row.prediction == "Fatal" %}
+                        <span class="badge fatal"> Fatal</span>
 
-                        🔴 Fatal
-
-                        {% elif row.prediction == 'Serious' %}
-
-                        🟠 Serious
+                        {% elif row.prediction == "Serious" %}
+                        <span class="badge serious"> Serious</span>
 
                         {% else %}
-
-                        🟢 Slight
+                        <span class="badge slight"> Slight</span>
 
                         {% endif %}
 
@@ -147,25 +316,196 @@
 
                 {% endfor %}
 
-            </tbody>
+                </tbody>
 
-        </table>
+            </table>
+
+        </div>
 
     </div>
-
-</div>
-```
 
 </section>
 
 <footer class="footer">
-
-
-Smart City Road Accident Severity Prediction System
-
-
+    Smart City Road Accident Severity Prediction System
 </footer>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const featureSelect =
+    document.getElementById("featureSelect");
+
+    const searchValue =
+    document.getElementById("searchValue");
+
+    function filterTable() {
+
+        const column =
+        parseInt(featureSelect.value);
+
+        const value =
+        searchValue.value
+        .toLowerCase()
+        .trim();
+
+        const rows =
+        document.querySelectorAll(
+            "#historyTable tbody tr"
+        );
+
+        rows.forEach(function(row){
+
+            const cellValue =
+            row.cells[column]
+            .textContent
+            .toLowerCase()
+            .trim();
+
+            if (
+                value === "" ||
+                cellValue.includes(value)
+            ) {
+
+                row.style.display = "";
+
+            }
+            else {
+
+                row.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+    featureSelect.addEventListener(
+        "change",
+        filterTable
+    );
+
+    searchValue.addEventListener(
+        "keyup",
+        filterTable
+    );
+
+});
+
+</script>
 
 </body>
 
+<script>
+
+document.getElementById("resetFilters").addEventListener("click", function () {
+
+    // Reset dropdowns
+    document.getElementById("severityFilter").value = "All";
+    document.getElementById("areaFilter").value = "All";
+    document.getElementById("weatherFilter").value = "All";
+
+    // Show all rows again
+    const rows = document.querySelectorAll("#historyTable tbody tr");
+
+    rows.forEach(row => {
+        row.style.display = "";
+    });
+
+});
+
+</script>
+
+<script>
+
+const severityFilter =
+document.getElementById("severityFilter");
+
+const areaFilter =
+document.getElementById("areaFilter");
+
+const weatherFilter =
+document.getElementById("weatherFilter");
+
+function applyFilters(){
+
+    const rows =
+    document.querySelectorAll(
+        "#historyTable tbody tr"
+    );
+
+    rows.forEach(row=>{
+
+        const prediction =
+        row.cells[9]
+        .innerText
+        .toLowerCase();
+
+        const area =
+        row.cells[6]
+        .innerText
+        .toLowerCase();
+
+        const weather =
+        row.cells[2]
+        .innerText
+        .toLowerCase();
+
+        const severityMatch =
+        severityFilter.value==="All" ||
+        prediction.includes(
+            severityFilter.value.toLowerCase()
+        );
+
+        const areaMatch =
+        areaFilter.value==="All" ||
+        area.includes(
+            areaFilter.value.toLowerCase()
+        );
+
+        const weatherMatch =
+        weatherFilter.value==="All" ||
+        weather.includes(
+            weatherFilter.value.toLowerCase()
+        );
+
+        row.style.display =
+        severityMatch &&
+        areaMatch &&
+        weatherMatch
+        ? ""
+        : "none";
+
+    });
+
+}
+
+severityFilter.addEventListener(
+"change",
+applyFilters
+);
+
+areaFilter.addEventListener(
+"change",
+applyFilters
+);
+
+weatherFilter.addEventListener(
+"change",
+applyFilters
+);
+
+function resetFilters(){
+
+    severityFilter.value="All";
+    areaFilter.value="All";
+    weatherFilter.value="All";
+
+    applyFilters();
+}
+
+</script>
+
 </html>
+```
