@@ -40,27 +40,43 @@ def home():
 @app.route("/history")
 def history():
 
-    import sqlite3
-
     conn = sqlite3.connect("database/accidents.db")
-
     conn.row_factory = sqlite3.Row
 
     cursor = conn.cursor()
 
-    cursor.execute("""
-        SELECT *
-        FROM predictions
-        ORDER BY id DESC
-    """)
+    cursor.execute(
+        "SELECT * FROM predictions ORDER BY id DESC"
+    )
 
     records = cursor.fetchall()
+
+    total = len(records)
+
+    slight = sum(
+        1 for row in records
+        if row["prediction"] == "Slight"
+    )
+
+    serious = sum(
+        1 for row in records
+        if row["prediction"] == "Serious"
+    )
+
+    fatal = sum(
+        1 for row in records
+        if row["prediction"] == "Fatal"
+    )
 
     conn.close()
 
     return render_template(
         "history.html",
-        records=records
+        records=records,
+        total=total,
+        slight=slight,
+        serious=serious,
+        fatal=fatal
     )
 
 
