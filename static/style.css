@@ -39,12 +39,6 @@ header p{
     font-size:18px;
 }
 
-.dashboard{
-
-    width:90%;
-    max-width:1400px;
-    margin:auto;
-}
 
 .stats-container{
 
@@ -492,11 +486,20 @@ tr:hover{
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fit,minmax(450px,1fr));
+    repeat(2,1fr);
 
     gap:25px;
 
     margin-top:20px;
+}
+
+@media(max-width:900px){
+
+    .chart-grid{
+
+        grid-template-columns:1fr;
+    }
+
 }
 
 .chart-card{
@@ -817,4 +820,400 @@ font-weight:600;
 .about-icon{
     font-size:30px;
     margin-right:10px;
+}
+
+/* ==========================
+ABOUT PAGE IMPROVEMENTS
+========================== */
+
+.glass-card{
+
+```
+margin-bottom:25px;
+
+transition:.3s;
+```
+
+}
+
+.glass-card:hover{
+
+```
+transform:translateY(-3px);
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.25);
+```
+
+}
+
+.glass-card h2{
+
+```
+margin-bottom:18px;
+
+color:#00ff99;
+
+font-size:26px;
+
+border-bottom:
+2px solid rgba(255,255,255,.15);
+
+padding-bottom:10px;
+```
+
+}
+
+.glass-card p{
+
+line-height:1.8;
+
+font-size:16px;
+
+color:#f5f5f5;
+
+}
+
+.glass-card ul{
+
+padding-left:20px;
+
+line-height:2;
+
+}
+
+.glass-card li{
+
+margin-bottom:8px;
+
+color:white;
+
+}
+
+/* Feature Grid */
+
+.feature-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:18px;
+
+margin-top:20px;
+
+}
+
+.feature-box{
+
+background:
+rgba(255,255,255,.08);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:15px;
+
+padding:20px;
+
+text-align:center;
+
+color:white;
+
+font-weight:600;
+
+transition:.3s;
+
+
+}
+
+.feature-box:hover{
+
+```
+background:
+rgba(255,255,255,.15);
+
+transform:translateY(-4px);
+
+border:
+1px solid rgba(0,255,153,.4);
+```
+
+}
+
+/* About Section Cards */
+
+.result-panel{
+
+```
+background:
+rgba(255,255,255,.10);
+
+backdrop-filter:blur(15px);
+
+border-radius:22px;
+
+padding:30px;
+
+color:white;
+```
+
+}
+
+/* Better Dashboard Layout */
+
+.dashboard{
+
+```
+width:90%;
+
+max-width:1300px;
+
+margin:auto;
+
+display:flex;
+
+flex-direction:column;
+
+gap:25px;
+```
+
+}
+
+/* Mobile Responsive */
+
+@media(max-width:768px){
+
+```
+.glass-card h2{
+
+    font-size:22px;
+}
+
+.feature-grid{
+
+    grid-template-columns:1fr;
+}
+```
+
+}
+/* LOGIN & PASSWORD PAGES */
+
+
+
+.form-panel h2{
+
+```
+font-size:32px;
+
+margin-bottom:25px;
+```
+
+}
+
+.form-panel input{
+
+```
+height:55px;
+
+font-size:17px;
+
+margin-bottom:10px;
+```
+
+}
+
+.form-panel label{
+
+```
+font-size:17px;
+
+font-weight:600;
+```
+
+}
+
+.form-panel button{
+
+```
+height:55px;
+
+font-size:18px;
+
+font-weight:600;
+```
+
+}
+
+/* LOGIN PAGE */
+
+.login-container{
+
+    max-width:900px;
+
+    margin:40px auto;
+
+    padding:50px;
+
+}
+
+.login-form{
+
+    max-width:600px;
+
+    margin:auto;
+}
+
+.login-form input{
+
+    height:60px;
+
+    font-size:18px;
+
+    border-radius:15px;
+}
+
+.login-form label{
+
+    font-size:18px;
+
+    font-weight:600;
+}
+
+/* LOGIN PAGE */
+
+.login-container{
+
+```
+width:90%;
+
+max-width:900px;
+
+margin:40px auto;
+
+padding:50px;
+```
+
+}
+
+.login-container input{
+
+```
+width:100%;
+
+height:60px;
+
+font-size:18px;
+
+border-radius:15px;
+```
+
+}
+
+.login-btn{
+
+```
+width:100%;
+
+height:60px;
+
+border:none;
+
+border-radius:15px;
+
+background:linear-gradient(
+    135deg,
+    #00e676,
+    #00c853
+);
+
+color:white;
+
+font-size:22px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+```
+
+}
+
+.login-btn:hover{
+
+```
+transform:translateY(-3px);
+
+box-shadow:
+0 10px 25px rgba(0,230,118,.4);
+```
+
+}
+
+/* ==========================
+HOME PAGE FIX
+========================== */
+
+.dashboard{
+    width:90%;
+    max-width:1400px;
+    margin:auto;
+}
+
+.content{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+}
+
+.form-panel,
+.result-panel{
+    width:100%;
+}
+
+@media(max-width:900px){
+
+    .content{
+        grid-template-columns:1fr;
+    }
+
+    .stats-container{
+        grid-template-columns:1fr;
+    }
+}
+
+/* ==========================
+LOGIN PAGE ONLY
+========================== */
+
+.login-container{
+    width:90%;
+    max-width:900px;
+    margin:40px auto;
+    padding:50px;
+}
+
+.login-btn{
+    width:100%;
+    height:60px;
+    border:none;
+    border-radius:15px;
+    background:linear-gradient(
+        135deg,
+        #00e676,
+        #00c853
+    );
+    color:white;
+    font-size:22px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:
+    0 10px 25px rgba(0,230,118,.4);
 }
