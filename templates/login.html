@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <h1>🔐 Secure Login</h1>
+
+<p style="margin-bottom:25px;opacity:.8;">
+Access the Smart City Road Accident Severity Prediction Dashboard
+</p>
+</header>
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+
+<div class="dashboard">
+
+```
+<div class="form-panel login-container">
+
+    <h2 style="text-align:center;font-size:42px;">
+        Welcome Back
+    </h2>
+
+    <p style="
+    text-align:center;
+    margin-bottom:35px;
+    opacity:.8;
+    font-size:18px;">
+
+        Sign in to continue
+
+    </p>
+
+    <form method="POST">
+
+        <label>Username</label>
+
+        <input
+            type="text"
+            name="username"
+            placeholder="Enter Username"
+            required>
+
+        <label>Password</label>
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            required>
+
+        <br><br>
+
+        <button
+            type="submit"
+            class="login-btn">
+
+            🔐 Sign In
+
+        </button>
+
+    </form>
+
+    {% if error %}
+
+    <p style="
+    color:#ff5252;
+    text-align:center;
+    margin-top:20px;">
+
+        {{ error }}
+
+    </p>
+
+    {% endif %}
+
+    <hr style="
+    margin:30px 0;
+    opacity:.3;">
+
+    <p style="
+    text-align:center;
+    font-size:17px;">
+
+        New User?
+
+        <a href="/register"
+           class="contact-link">
+
+            Create Account
+
+        </a>
+
+    </p>
+
+</div>
+```
+
+</div>
+
+<footer class="footer">
+
+
+Smart City Road Accident Severity Prediction System
+
+
+</footer>
+
+</body>
+
+</html>
