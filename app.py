@@ -1,9 +1,23 @@
-from flask import Flask, render_template, request, jsonify
+from flask import (
+    Flask,
+    render_template,
+    request,
+    jsonify,
+    redirect,
+    session,
+    url_for
+)
+
+from werkzeug.security import (
+    generate_password_hash,
+    check_password_hash
+)
 import pandas as pd
 import joblib
 import sqlite3
 
 app = Flask(__name__)
+app.secret_key = "road_accident_project_2026"
 
 # ==========================
 # LOAD MODEL
@@ -32,13 +46,117 @@ def get_db_connection():
 # ROUTES
 # ==========================
 
+@app.route("/login", methods=["GET","POST"])
+def login():
+
+    if request.method == "POST":
+
+        username = request.form["username"]
+        password = request.form["password"]
+
+        conn = get_db_connection()
+
+        user = conn.execute(
+            """
+            SELECT * FROM users
+            WHERE username = ?
+            """,
+            (username,)
+        ).fetchone()
+
+        conn.close()
+
+        if user:
+
+            if check_password_hash(
+                user["password"],
+                password
+            ):
+
+                session["logged_in"] = True
+                session["username"] = username
+
+                return redirect("/")
+
+        return render_template(
+            "login.html",
+            error="Invalid credentials"
+        )
+
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+
+    session.clear()
+
+    return redirect("/login")
+
+
+# ==========================
+# ROUTES
+# ==========================
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+
+    if request.method == "POST":
+
+        username = request.form["username"]
+        email = request.form["email"]
+        password = request.form["password"]
+
+        hashed_password = generate_password_hash(password)
+
+        conn = get_db_connection()
+
+        try:
+
+            conn.execute(
+                """
+                INSERT INTO users
+                (username,email,password)
+
+                VALUES(?,?,?)
+                """,
+                (
+                    username,
+                    email,
+                    hashed_password
+                )
+            )
+
+            conn.commit()
+
+            conn.close()
+
+            return redirect("/login")
+
+        except:
+
+            conn.close()
+
+            return render_template(
+                "register.html",
+                error="User already exists"
+            )
+
+    return render_template("register.html")
+
 @app.route("/")
 def home():
+
+    if not session.get("logged_in"):
+        return redirect("/login")
+
     return render_template("index.html")
 
 
 @app.route("/history")
 def history():
+
+    if not session.get("logged_in"):
+        return redirect("/login")
 
     conn = sqlite3.connect("database/accidents.db")
     conn.row_factory = sqlite3.Row
@@ -82,22 +200,144 @@ def history():
 
 @app.route("/about")
 def about():
+
+    if not session.get("logged_in"):
+        return redirect("/login")
+
     return render_template("about.html")
 
 
 @app.route("/model-info")
 def model_info():
+
+    if not session.get("logged_in"):
+        return redirect("/login")
+
     return render_template("model_info.html")
 
 
 @app.route("/analytics")
 def analytics():
+
+    if not session.get("logged_in"):
+        return redirect("/login")
+
     return render_template("analytics.html")
+
 
 @app.route("/contact")
 def contact():
+
+    if not session.get("logged_in"):
+        return redirect("/login")
+
     return render_template("contact.html")
 
+@app.route("/profile")
+def profile():
+
+    if not session.get("logged_in"):
+        return redirect("/login")
+
+    conn = get_db_connection()
+
+    user = conn.execute(
+        """
+        SELECT *
+        FROM users
+        WHERE username = ?
+        """,
+        (session["username"],)
+    ).fetchone()
+
+    conn.close()
+
+    return render_template(
+        "profile.html",
+        user=user
+    )
+
+@app.route(
+    "/change-password",
+    methods=["GET","POST"]
+)
+def change_password():
+
+    if not session.get("logged_in"):
+        return redirect("/login")
+
+    if request.method == "POST":
+
+        current_password = request.form[
+            "current_password"
+        ]
+
+        new_password = request.form[
+            "new_password"
+        ]
+
+        conn = get_db_connection()
+
+        user = conn.execute(
+            """
+            SELECT *
+            FROM users
+            WHERE username = ?
+            """,
+            (session["username"],)
+        ).fetchone()
+
+        if check_password_hash(
+            user["password"],
+            current_password
+        ):
+
+            new_hash = generate_password_hash(
+                new_password
+            )
+
+            conn.execute(
+                """
+                UPDATE users
+
+                SET password = ?
+
+                WHERE id = ?
+                """,
+                (
+                    new_hash,
+                    user["id"]
+                )
+            )
+
+            conn.commit()
+
+            conn.close()
+
+            return render_template(
+                "change_password.html",
+                message="Password Updated Successfully"
+            )
+
+        conn.close()
+
+        return render_template(
+            "change_password.html",
+            message="Incorrect Current Password"
+        )
+
+    return render_template(
+        "change_password.html"
+    )
+
+confirm_password = request.form["confirm_password"]
+
+if new_password != confirm_password:
+
+    return render_template(
+        "change_password.html",
+        message="New passwords do not match"
+    )
 
 # ==========================
 # PREDICT
