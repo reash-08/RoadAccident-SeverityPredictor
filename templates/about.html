@@ -1,219 +1,268 @@
-<!DOCTYPE html>
-<html lang="en">
+<section class="dashboard">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Project</title>
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
-</head>
+<header>
 
-<body>
 
-    <header>
-        <h1>ℹ️ About The Project</h1>
-        <p>Smart City Road Accident Severity Prediction System</p>
-    </header>
+<h1>ℹ️ About The Project</h1>
 
-    <nav class="navbar">
-        <a href="/">Home</a>
-        <a href="/history">History</a>
-        <a href="/analytics">Analytics</a>
-        <a href="/model-info">Model Info</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-    </nav>
+<p>
+    Smart City Road Accident Severity Prediction System
+</p>
 
-    <section class="dashboard">
 
-        <!-- Project Overview -->
-        <div class="result-panel glass-card">
+</header>
 
-            <h2>📌 Project Overview</h2>
 
-            <p>
-                The Smart City Road Accident Severity Prediction System is a Machine Learning based web application
-                developed to predict accident severity using road, weather, traffic, environmental, and casualty information.
-            </p>
+<nav class="navbar">
 
-            <br>
 
-            <p>
-                The application assists authorities, road safety analysts, and city planners in identifying accident risks,
-                improving road safety measures, and supporting faster decision-making through intelligent severity prediction.
-            </p>
+<a href="/">Home</a>
 
-        </div>
+<a href="/history">History</a>
 
-        <!-- Architecture -->
-        <div class="result-panel glass-card">
+<a href="/analytics">Analytics</a>
 
-            <h2>🏗️ Project Architecture</h2>
+<a href="/model-info">Model Info</a>
 
-            <div class="architecture-grid">
+<a href="/about">About</a>
 
-                <div class="arch-box">
-                    <h3>Frontend</h3>
-                    <p>HTML, CSS, JavaScript</p>
-                </div>
+<a href="/contact">Contact</a>
 
-                <div class="arch-box">
-                    <h3>Backend</h3>
-                    <p>Flask Framework</p>
-                </div>
+<a href="/profile">Profile</a>
 
-                <div class="arch-box">
-                    <h3>Database</h3>
-                    <p>SQLite</p>
-                </div>
+<a href="/logout">Logout</a>
 
-                <div class="arch-box">
-                    <h3>ML Model</h3>
-                    <p>Gradient Boosting Classifier</p>
-                </div>
 
-            </div>
+</nav>
 
-        </div>
 
-        <!-- Workflow -->
-        <div class="result-panel glass-card">
+<!-- Project Overview -->
+<div class="result-panel glass-card">
 
-            <h2>⚙️ System Workflow</h2>
+    <h2>📌 Project Overview</h2>
 
-            <div class="workflow">
+    <p>
+        The Smart City Road Accident Severity Prediction System is an intelligent web-based application designed to predict accident severity using historical road accident data and machine learning techniques.
+    </p>
 
-                👤 User Input
+    <br>
 
-                <br>↓<br>
+    <p>
+        By analyzing accident-related factors such as road conditions, weather, lighting, speed limits, and casualty information, the system provides real-time severity predictions that can assist decision-makers in improving road safety and emergency response planning.
+    </p>
 
-                🌐 Flask Backend
+</div>
 
-                <br>↓<br>
 
-                ⚙️ Feature Encoding
+<!-- Why This Project Matters -->
+<div class="result-panel glass-card">
 
-                <br>↓<br>
+    <h2>🌍 Why This Project Matters</h2>
 
-                🤖 Gradient Boosting Model
+    <p>
+        Road accidents are a major public safety concern and often result in injuries, fatalities, and economic losses. Early identification of accident severity can help authorities allocate resources more efficiently and improve response times.
+    </p>
 
-                <br>↓<br>
+    <br>
 
-                📊 Severity Prediction
+    <p>
+        This project demonstrates how machine learning can transform historical accident data into actionable insights, supporting safer transportation systems and smarter urban planning initiatives.
+    </p>
 
-                <br>↓<br>
+</div>
 
-                🗄️ SQLite Database Storage
+<!-- Project Objectives -->
+<div class="result-panel glass-card">
 
-                <br>↓<br>
+    <h2>🎯 Project Objectives</h2>
 
-                📈 History & Analytics Dashboard
+    <ul>
 
-            </div>
+        <li>Predict accident severity using historical accident records.</li>
 
-        </div>
+        <li>Provide instant accident risk assessment.</li>
 
-        <!-- Dataset -->
-        <div class="result-panel glass-card">
+        <li>Support road safety analysis and decision-making.</li>
 
-            <h2>📂 Dataset Information</h2>
+        <li>Maintain historical prediction records for future review.</li>
 
-            <ul>
-                <li><strong>Dataset:</strong> UK Road Accident Dataset</li>
-                <li><strong>Records:</strong> 50,000+</li>
-                <li><strong>Target Variable:</strong> Accident Severity</li>
-                <li><strong>Classes:</strong> Slight, Serious, Fatal</li>
-                <li><strong>Prediction Type:</strong> Multi-Class Classification</li>
-            </ul>
+        <li>Visualize accident trends through an analytics dashboard.</li>
 
-        </div>
+    </ul>
 
-        <!-- Features -->
-        <div class="result-panel glass-card">
+</div>
 
-            <h2>🚀 Key Features</h2>
+<!-- Dataset Information -->
+<div class="result-panel glass-card">
 
-            <div class="feature-grid">
+    <h2>📂 Dataset Information</h2>
 
-                <div class="feature-box">⚡ Real-Time Prediction</div>
+    <ul>
 
-                <div class="feature-box">📊 Confidence Score</div>
+        <li><strong>Dataset:</strong> UK Road Accident Dataset</li>
 
-                <div class="feature-box">🗄️ SQLite Storage</div>
+        <li><strong>Records Used:</strong> 50,000+</li>
 
-                <div class="feature-box">📜 Prediction History</div>
+        <li><strong>Target Variable:</strong> Accident Severity</li>
 
-                <div class="feature-box">📈 Analytics Dashboard</div>
+        <li><strong>Severity Classes:</strong> Slight, Serious, Fatal</li>
 
-                <div class="feature-box">🤖 Machine Learning Integration</div>
+        <li><strong>Prediction Type:</strong> Multi-Class Classification</li>
 
-                <div class="feature-box">🌐 Flask Deployment</div>
+    </ul>
 
-                <div class="feature-box">📱 Responsive UI</div>
+</div>
 
-                <div class="feature-box">🎯 Severity Classification</div>
+<!-- Key Features -->
+<div class="result-panel glass-card">
 
-            </div>
+    <h2>🚀 Key Features</h2>
 
-        </div>
+    <div class="feature-grid">
 
-        <!-- Prediction Features -->
-        <div class="result-panel glass-card">
+        <div class="feature-box">⚡ Real-Time Predictions</div>
 
-            <h2>📈 Features Used For Prediction</h2>
+        <div class="feature-box">📊 Confidence Score Display</div>
 
-            <ul>
-                <li>Road Type</li>
-                <li>Weather Conditions</li>
-                <li>Road Surface Conditions</li>
-                <li>Light Conditions</li>
-                <li>Speed Limit</li>
-                <li>Urban / Rural Area</li>
-                <li>Number of Vehicles</li>
-                <li>Number of Casualties</li>
-            </ul>
+        <div class="feature-box">📜 Prediction History</div>
 
-        </div>
+        <div class="feature-box">📈 Analytics Dashboard</div>
 
-        <!-- Achievements -->
-        <div class="result-panel glass-card">
+        <div class="feature-box">🔍 Historical Data Analysis</div>
 
-            <h2>🏆 Project Achievements</h2>
+        <div class="feature-box">🗄 Secure Data Storage</div>
 
-            <ul>
-                <li>Successfully trained and deployed a Gradient Boosting Classifier.</li>
-                <li>Achieved approximately 77.5% Weighted F1 Score.</li>
-                <li>Integrated Machine Learning, Flask, SQLite, and Analytics Dashboard.</li>
-                <li>Implemented prediction history tracking and filtering.</li>
-                <li>Built a complete end-to-end web application.</li>
-            </ul>
+        <div class="feature-box">📱 Responsive Interface</div>
 
-        </div>
+        <div class="feature-box">🎯 Severity Classification</div>
 
-        <!-- Future Scope -->
-        <div class="result-panel glass-card">
+        <div class="feature-box">🔐 User Authentication</div>
 
-            <h2>🔮 Future Enhancements</h2>
+    </div>
 
-            <ul>
-                <li>Live Accident Data Integration</li>
-                <li>GPS-Based Risk Prediction</li>
-                <li>Accident Hotspot Detection</li>
-                <li>Cloud Deployment</li>
-                <li>Mobile Application Support</li>
-                <li>Interactive Maps & Heatmaps</li>
-                <li>Real-Time Traffic Integration</li>
-            </ul>
+</div>
 
-        </div>
+<!-- Intended Users -->
+<div class="result-panel glass-card">
 
-    </section>
+    <h2>👥 Intended Users</h2>
 
-    <footer class="footer">
-        Smart City Road Accident Severity Prediction System
-    </footer>
+    <div class="feature-grid">
 
-</body>
-</html>
+        <div class="feature-box">🚓 Traffic Authorities</div>
+
+        <div class="feature-box">🏛 Government Agencies</div>
+
+        <div class="feature-box">🚑 Emergency Services</div>
+
+        <div class="feature-box">📊 Safety Analysts</div>
+
+        <div class="feature-box">🏙 Smart City Planners</div>
+
+        <div class="feature-box">🎓 Researchers & Students</div>
+
+    </div>
+
+</div>
+
+<!-- Prediction Features -->
+<div class="result-panel glass-card">
+
+    <h2>📈 Features Used For Prediction</h2>
+
+    <ul>
+
+        <li>Road Type</li>
+
+        <li>Weather Conditions</li>
+
+        <li>Road Surface Conditions</li>
+
+        <li>Light Conditions</li>
+
+        <li>Speed Limit</li>
+
+        <li>Urban / Rural Area</li>
+
+        <li>Number of Vehicles</li>
+
+        <li>Number of Casualties</li>
+
+    </ul>
+
+</div>
+
+<!-- Key Benefits -->
+<div class="result-panel glass-card">
+
+    <h2>📊 Key Benefits</h2>
+
+    <ul>
+
+        <li>Improves accident risk assessment and awareness.</li>
+
+        <li>Supports data-driven road safety planning.</li>
+
+        <li>Provides instant severity predictions.</li>
+
+        <li>Helps identify accident severity trends.</li>
+
+        <li>Enhances analytical decision-making.</li>
+
+        <li>Stores and tracks historical predictions.</li>
+
+    </ul>
+
+</div>
+
+<!-- Achievements -->
+<div class="result-panel glass-card">
+
+    <h2>🏆 Project Achievements</h2>
+
+    <ul>
+
+        <li>Successfully trained and deployed a machine learning model.</li>
+
+        <li>Achieved approximately 77.5% Weighted F1 Score.</li>
+
+        <li>Integrated prediction, analytics, and history tracking.</li>
+
+        <li>Implemented user authentication and secure access.</li>
+
+        <li>Built a complete end-to-end accident severity prediction platform.</li>
+
+    </ul>
+
+</div>
+
+<!-- Future Scope -->
+<div class="result-panel glass-card">
+
+    <h2>🔮 Future Enhancements</h2>
+
+    <ul>
+
+        <li>Live Accident Data Integration</li>
+
+        <li>GPS-Based Risk Prediction</li>
+
+        <li>Accident Hotspot Detection</li>
+
+        <li>Cloud Deployment</li>
+
+        <li>Mobile Application Support</li>
+
+        <li>Interactive Maps & Heatmaps</li>
+
+        <li>Real-Time Traffic Integration</li>
+
+    </ul>
+
+</div>
+
+
+</section>
