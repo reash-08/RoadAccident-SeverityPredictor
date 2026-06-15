@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Register</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static',
+filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🚦 Smart City Accident Predictor</h1>
+
+<p>Create Account</p>
+
+</header>
+
+<div class="dashboard">
+
+<div class="form-panel"
+style="max-width:550px;margin:auto;">
+
+<h2>Register</h2>
+
+<form method="POST">
+
+<label>Username</label>
+
+<input
+type="text"
+name="username"
+required>
+
+<label>Email</label>
+
+<input
+type="email"
+name="email"
+required>
+
+<label>Password</label>
+
+<input
+type="password"
+name="password"
+required>
+
+<br><br>
+
+<button
+type="submit"
+class="predict-btn">
+
+Create Account
+
+</button>
+
+</form>
+
+{% if error %}
+<p style="color:red;">
+{{ error }}
+</p>
+{% endif %}
+
+<br>
+
+<p>
+
+Already have account?
+
+<a href="/login"
+class="contact-link">
+
+Login
+
+</a>
+
+</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
