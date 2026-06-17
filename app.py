@@ -276,6 +276,16 @@ def change_password():
             "new_password"
         ]
 
+        confirm_password = request.form[
+            "confirm_password"
+        ]
+
+        if new_password != confirm_password:
+            return render_template(
+                "change_password.html",
+                message="New passwords do not match"
+            )
+
         conn = get_db_connection()
 
         user = conn.execute(
@@ -328,15 +338,6 @@ def change_password():
 
     return render_template(
         "change_password.html"
-    )
-
-confirm_password = request.form["confirm_password"]
-
-if new_password != confirm_password:
-
-    return render_template(
-        "change_password.html",
-        message="New passwords do not match"
     )
 
 # ==========================
